@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IceCore.ai - Ваш путь к эффективной поддержке</title>
+    <style>
+        /* --- ОБЩИЕ СТИЛИ --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #000; color: #fff; }
+        h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+        .section-padding { padding: 100px 45px; }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 5; }
+
+        /* --- ПЛАВАЮЩИЙ ХЭДЕР --- */
+        .main-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; z-index: 1000; background-color: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .header-logo { font-size: 1.8rem; font-weight: bold; text-decoration: none; color: #4A90E2; }
+        .header-nav { display: none; }
+        .header-actions a { color: #d1d1d1; text-decoration: none; margin-left: 20px; transition: color 0.3s ease; }
+        .header-actions a:hover { color: #fff; }
+        .register-button { background-color: #e50914; color: white; padding: 8px 17px; border-radius: 5px; font-weight: 500; }
+
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero-section { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('icecore-bg.png'); background-size: cover; background-position: center center; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.9) 100%); }
+        .hero-content { position: relative; z-index: 5; text-align: center; padding: 0 20px; max-width: 800px; }
+        .hero-content h1 { font-size: 3.125rem; }
+        .hero-content h2 { font-size: 1.625rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .email-form { display: flex; justify-content: center; align-items: center; }
+        .email-input { width: 450px; height: 60px; padding: 10px; font-size: 1rem; border: 1px solid #8c8c8c; border-radius: 2px 0 0 2px; outline: none; }
+        .get-started-button { height: 60px; background-color: #e50914; color: white; font-size: 1.625rem; padding: 0 26px; border: none; cursor: pointer; border-radius: 0 2px 2px 0; }
+        
+        /* --- ОСНОВНОЙ КОНТЕНТ --- */
+        main { position: relative; background-color: #000; }
+        .section-block { text-align: center; }
+
+        /* --- ОБЩИЕ СТИЛИ ДЛЯ БЛОКОВ --- */
+        .section-title { font-size: 2.5rem; color: #fff; opacity: 0.9; margin-bottom: 1rem; text-align: center; }
+        .section-subtitle { font-size: 1.25rem; color: #adb5bd; max-width: 700px; margin: 0 auto 60px auto; text-align: center; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .info-card { background-color: #0F111A; color: #fff; padding: 30px; border-radius: 12px; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; border: 1px solid #2a2a2a;}
+        .info-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); border-color: rgba(229, 9, 20, 0.5); }
+        .info-card .icon { color: #e50914; margin-bottom: 20px; }
+        .info-card .icon svg { width: 32px; height: 32px; }
+        .info-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .info-card p { font-size: 1rem; color: #b3b3b3; line-height: 1.6; }
+        .benefits-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        /* --- СВЕТЯЩИЙСЯ РАЗДЕЛИТЕЛЬ --- */
+        .glow-divider { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-50%); z-index: 20; }
+        .glow-divider svg { width: 100%; height: auto; filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.5)) drop-shadow(0 0 2px rgba(229, 9, 20, 0.3)); }
+        
+        /* --- START: ИНТЕРАКТИВНАЯ СЕКЦИЯ ДЕМОНСТРАЦИИ --- */
+        .nest-ai-demo-section {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+        .nest-ai-demo-section .section-title { font-size: 2.5rem; margin-bottom: 15px; color: #fff; }
+        .nest-ai-demo-section .section-subtitle { font-size: 1.25rem; color: #ccc; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .demo-content-wrapper { display: flex; justify-content: center; align-items: flex-start; gap: 50px; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; }
+        .features-list { flex: 1; min-width: 300px; max-width: 400px; text-align: left; display: flex; flex-direction: column; gap: 20px; }
+        .feature-item { cursor: pointer; padding: 20px; border-radius: 12px; transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; background-color: #1a1a1a; border: 1px solid #2a2a2a; }
+        .feature-item:hover { background-color: rgba(255, 77, 106, 0.1); transform: translateY(-3px); border-color: rgba(255, 77, 106, 0.5); }
+        .feature-item h3 { color: #FF4D6A; font-size: 1.25rem; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .feature-item .feature-number { background-color: #FF4D6A; color: #fff; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1rem; flex-shrink: 0; }
+        .feature-item p { color: #bbb; font-size: 0.95rem; line-height: 1.6; padding-left: 45px; }
+        .dashboard-display { flex: 2; display: flex; justify-content: center; align-items: center; min-width: 600px; }
+        .dashboard-container { position: relative; max-width: 980px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); overflow: hidden; }
+        .dashboard-image { width: 100%; height: auto; display: block; filter: brightness(0.85); }
+        .highlight-area { position: absolute; border: 3px solid #FF4D6A; background-color: rgba(255, 77, 106, 0.2); border-radius: 8px; opacity: 0; transition: opacity 0.3s ease-in-out; pointer-events: none; z-index: 10; box-shadow: 0 0 20px rgba(255, 77, 106, 0.5); }
+        #highlight-centralization { top: 2%; left: 1%; width: 21%; height: 96%; }
+        #highlight-ai-classification { top: 15.5%; left: 24%; width: 74.5%; height: 33%; }
+        #highlight-actionable-analytics { top: 1%; left: 1%; width: 98%; height: 98%; }
+        #highlight-workflow-management { top: 15.5%; left: 76.5%; width: 21.5%; height: 33%; }
+        /* --- END: ИНТЕРАКТИВНАЯ СЕКЦИЯ ДЕМОНСТРАЦИИ --- */
+
+        /* --- СЕКЦИЯ "КОМАНДА" --- */
+        .team-section {
+            background-color: #000;
+        }
+        .team-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 30px; 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .team-card { 
+            background: #0F111A; 
+            padding: 30px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2a2a2a;
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(229, 9, 20, 0.5);
+        }
+        .team-card img { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            flex-shrink: 0; 
+            border: 3px solid #333;
+            transition: border-color 0.3s ease;
+        }
+        .team-card:hover img {
+            border-color: #e50914;
+        }
+        .team-card .title { color: #e50914; font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; }
+        .team-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        .team-card p { font-size: 1rem; color: #b3b3b3; line-height: 1.6; }
+        
+        /* --- СЕКЦИЯ "ПРИЗЫВ К ДЕЙСТВИЮ" (CTA) - ОБНОВЛЕНА --- */
+        .cta-section { 
+            text-align: center; 
+            position: relative;
+            overflow: hidden; /* Важно для анимации */
+            background: linear-gradient(135deg, #e50914, #FF416C, #e50914);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        .cta-section .section-title { 
+            opacity: 1; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .cta-section .section-subtitle { 
+            color: rgba(255,255,255,0.95); 
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .cta-form { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            text-align: left; 
+        }
+        .form-group { width: 100%; }
+        .full-width { grid-column: 1 / -1; }
+        .cta-form input, .cta-form textarea { 
+            width: 100%; 
+            padding: 18px; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            border-radius: 10px; 
+            background: rgba(255,255,255,0.15); 
+            color: #fff; 
+            font-size: 1rem; 
+            outline: none; 
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .cta-form input::placeholder, .cta-form textarea::placeholder { 
+            color: rgba(255,255,255,0.7); 
+        }
+        .cta-form input:focus, .cta-form textarea:focus {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(255,255,255,0.3), inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .cta-form textarea { resize: vertical; min-height: 120px; }
+        .cta-submit-btn { 
+            background: #fff; 
+            color: #e50914; 
+            border: none; 
+            padding: 18px 30px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .cta-submit-btn:hover { 
+            transform: translateY(-3px) scale(1.03); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* --- ЭФФЕКТ СВЕЧЕНИЯ --- */
+        .glow-container { position: relative; overflow: hidden; }
+        .mouse-glow { position: absolute; top:0; left:0; width: 600px; height: 600px; background: radial-gradient(circle,rgba(200,200,220,0.1) 0%,rgba(255,255,255,0) 60%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity .4s ease-out; }
+        .glow-container:hover .mouse-glow { opacity: 1; transition: opacity .2s ease-in; }
+
+        @media (max-width: 1024px) {
+            .demo-content-wrapper { flex-direction: column; align-items: center; }
+            .features-list,
+            .dashboard-display { max-width: 100%; }
+            .dashboard-container { width: 100%; height: auto; max-width: 700px; }
+            .feature-item p { padding-left: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding { padding: 60px 20px; }
+            .hero-content h1 { font-size: 2rem; }
+            .email-form { flex-direction: column; align-items: stretch; max-width: 350px; margin: 0 auto; }
+            .email-input { border-radius: 2px; margin-bottom: 10px; width: 100%; }
+            .team-card { flex-direction: column; align-items: center; text-align: center; }
+            .cta-form { grid-template-columns: 1fr; }
+            .nest-ai-demo-section .section-title { font-size: 2.2em; }
+            .nest-ai-demo-section .section-subtitle { font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="#" class="header-logo">icecore.ai</a>
+        <div class="header-actions"><a href="#">Войти</a><a href="#" class="register-button">Регистрация</a></div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content"><h1>Безграничный анализ данных, отчёты и многое другое.</h1><h2>Работайте где угодно. Отменяйте когда угодно.</h2><form class="email-form" action="#"><input class="email-input" type="email" placeholder="Адрес электронной почты" required><button class="get-started-button" type="submit">Начать ></button></form></div>
+    </section>
+
+    <main class="glow-container">
+        <div class="mouse-glow"></div>
+        <div class="glow-divider">
+            <svg width="100%" height="20" viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="glow-gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#7e00ff; stop-opacity:0.8" /><stop offset="50%" style="stop-color:#e50914; stop-opacity:1" /><stop offset="100%" style="stop-color:#7e00ff; stop-opacity:0.8" /></linearGradient></defs><path d="M0 10 Q 300 20, 600 10 T 1200 10" fill="none" stroke="url(#glow-gradient)" stroke-width="2"/></svg>
+        </div>
+        
+        <!-- Секция "ПРОБЛЕМА" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Поддержка клиентов превратилась в хаос?</h1>
+                <p class="section-subtitle">Множество каналов, ручная обработка и потеря ценных данных мешают вашему росту.</p>
+                <div class="info-grid">
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div><h3>Информационный перегруз</h3><p>Запросы из десятков каналов (email, чаты, соцсети) теряются и обрабатываются неэффективно.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-1.103 0-2 .897-2 2v2.333L6.333 9H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2h2.333L10 21.333V22c0 1.103.897 2 2 2s2-.897 2-2v-2.333l3.667-1.667H20c1.103 0 2-.897 2-2v-6c0-1.103-.897-2-2-2h-2.333L14 7.333V5c0-1.103-.897-2-2-2zm-1 2h2v2.333L12 8 11 7.333V5zm-4.333 6h10.666L14 13.667V17H9v-3.333L6.667 11z"/></svg></div><h3>Неточная классификация</h3><p>Ручная сортировка обращений ведет к ошибкам, неверным выводам и потере времени.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zM5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM5 7h14v13H5V7z"/></svg></div><h3>Упущенные инсайты</h3><p>Ценные данные из обращений не используются для улучшения продукта и сервиса.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ИНТЕРАКТИВНАЯ СЕКЦИЯ -->
+        <section class="nest-ai-demo-section section-padding">
+            <h2 class="section-title">Nest.ai в действии: Получите реальные инсайты из данных</h2>
+            <p class="section-subtitle">
+                Мы не просто собираем данные – мы делаем их понятными и действенными.
+                Наведите курсор на любую функцию, чтобы увидеть её в работе.
+            </p>
+            <div class="demo-content-wrapper">
+                <div class="features-list">
+                    <div class="feature-item" data-target="highlight-centralization">
+                        <h3><span class="feature-number">1</span>Централизация и Структурирование</h3>
+                        <p>Все обращения собираются в одном месте и корректно классифицируются в единой системе.</p>
+                    </div>
+                    <div class="feature-item" data-target="highlight-ai-classification">
+                        <h3><span class="feature-number">2</span>Осмысленная AI-Классификация</h3>
+                        <p>Наш AI анализирует суть обращений и предоставляет готовые выводы, а не просто голые цифры.</p>
+                    </div>
+                    <div class="feature-item" data-target="highlight-actionable-analytics">
+                        <h3><span class="feature-number">3</span>Действенная Аналитика</h3>
+                        <p>Наглядные дашборды, которые дают реальные инсайты для принятия стратегических решений.</p>
+                    </div>
+                    <div class="feature-item" data-target="highlight-workflow-management">
+                        <h3><span class="feature-number">4</span>Управление Потоком</h3>
+                        <p>Эффективное отслеживание статусов и выявление узких мест, как, например, переходы на 2-ю линию поддержки.</p>
+                    </div>
+                </div>
+                <div class="dashboard-display">
+                    <div class="dashboard-container">
+                        <img src="nest.ai.jpg" alt="Nest.ai Dashboard" class="dashboard-image">
+                        <div class="highlight-area" id="highlight-centralization"></div>
+                        <div class="highlight-area" id="highlight-ai-classification"></div>
+                        <div class="highlight-area" id="highlight-actionable-analytics"></div>
+                        <div class="highlight-area" id="highlight-workflow-management"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Секция "ВЫГОДЫ" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Ключевые выгоды для вашего бизнеса</h1>
+                <div class="info-grid benefits-grid">
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1 13H9.5v-2H11v2zm0-4H9.5V7H11v4z"/></svg></div>
+                        <h3>Точные данные для решений</h3>
+                        <p>Принимайте решения, основанные на реальных данных, а не на догадках.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"/></svg></div>
+                        <h3>Экономия времени команды</h3>
+                        <p>Автоматизируйте ручную классификацию и освободите ресурсы для важных задач.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 18c3.93 0 7-3.07 7-7s-3.07-7-7-7-7 3.07-7 7 3.07 7 7 7zm0-12c2.822 0 5 2.178 5 5s-2.178 5-5 5-5-2.178-5-5 2.178-5 5-5z"/><path d="M12 14c-1.037 0-2-.828-2-1.934V12h4v.066C14 13.172 13.037 14 12 14z"/><path d="M11 9h2v2h-2z"/></svg></div>
+                        <h3>Улучшение продукта и сервиса</h3>
+                        <p>Понимайте истинные потребности клиентов и развивайте продукт целенаправленно.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg></div>
+                        <h3>Повышение лояльности</h3>
+                        <p>Качественная и быстрая поддержка ведет к довольным клиентам.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="m11.542 16.62-4.223 2.33.91-4.75-3.52-3.32 4.8-.59L12 6.12l2.49 4.17 4.8.6-3.52 3.31.91 4.75-4.22-2.33Z"/></svg></div>
+                        <h3>Быстрое внедрение</h3>
+                        <p>Начните получать пользу от IceCore.ai в кратчайшие сроки благодаря простоте интеграции.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 21h4V10H4v11zm6 0h4V3h-4v18zm6 0h4V6h-4v15z"/></svg></div>
+                        <h3>Прозрачная аналитика</h3>
+                        <p>Отслеживайте ключевые метрики поддержки на интуитивно понятных дашбордах.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "ДЛЯ КОГО" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Для кого создан IceCore.ai?</h1>
+                <p class="section-subtitle">Если вы стремитесь к data-driven подходу в поддержке и цените эффективность.</p>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <h3>IT-команды и Службы поддержки</h3>
+                        <p>Оптимизируйте процессы и повышайте качество обслуживания.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <h3>Менеджеры по работе с клиентами</h3>
+                        <p>Получайте глубокое понимание клиентов для улучшения взаимодействия.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-3V4c0-1.103-.897-2-2-2H9c-1.103 0-2 .897-2 2v2H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2zM9 4h6v2H9V4z"/></svg></div>
+                        <h3>Малый и Средний Бизнес</h3>
+                        <p>Доступный инструмент для эффективного управления поддержкой без больших затрат.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="m11.542 16.62-4.223 2.33.91-4.75-3.52-3.32 4.8-.59L12 6.12l2.49 4.17 4.8.6-3.52 3.31.91 4.75-4.22-2.33Z"/></svg></div>
+                        <h3>Стартапы</h3>
+                        <p>Быстро реагируйте на обратную связь и стройте клиент-ориентированный продукт.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "КОМАНДА" -->
+        <section class="team-section section-padding">
+            <div class="container">
+                <h1 class="section-title">За IceCore.ai стоит команда экспертов</h1>
+                <p class="section-subtitle">Мы объединили наш опыт, чтобы создать решение, которое действительно помогает.</p>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <img src="aisulu.png" alt="Айсулу Калшабекова">
+                        <div>
+                            <div class="title">Соосновательница, CEO</div>
+                            <h3>Айсулу Калшабекова</h3>
+                            <p>Экспертиза в анализе данных, клиентской поддержке и продуктовом видении. Опыт в Kaspi Bank и Relog.</p>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <img src="samat.png" alt="Самат Калшабеков">
+                        <div>
+                            <div class="title">Сооснователь, CTO</div>
+                            <h3>Самат Калшабеков</h3>
+                            <p>Frontend Lead с опытом в nFactorial, BCC, Datarockets, Beeline. Экспертиза в fullstack разработке и построении архитектуры.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Секция "ПРИЗЫВ К ДЕЙСТВИЮ" (ОБНОВЛЕНА) -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <h1 class="section-title">Готовы навести порядок в вашей поддержке?</h1>
+            <p class="section-subtitle">Присоединяйтесь к нашему пилотному проекту! Получите ранний доступ к IceCore.ai, помогите нам сделать продукт лучше и начните получать ценные инсайты уже сегодня.</p>
+            <form class="cta-form" action="#">
+                <div class="form-group"><input type="text" placeholder="Ваше имя" required></div>
+                <div class="form-group"><input type="email" placeholder="Ваш Email" required></div>
+                <div class="form-group full-width"><input type="text" placeholder="Название компании (необязательно)"></div>
+                <div class="form-group full-width"><textarea placeholder="Кратко о вашей задаче или вопрос (необязательно)"></textarea></div>
+                <div class="form-group full-width" style="text-align: center;"><button type="submit" class="cta-submit-btn">Отправить заявку на пилот</button></div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Эффект свечения за курсором
+        const glowContainer = document.querySelector('.glow-container');
+        if (glowContainer) {
+            const glow = glowContainer.querySelector('.mouse-glow');
+            glowContainer.addEventListener('mousemove', (e) => {
+                const rect = glowContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                glow.style.left = `${x}px`;
+                glow.style.top = `${y}px`;
+            });
+        }
+
+        // Логика для интерактивной демонстрации дашборда
+        document.addEventListener('DOMContentLoaded', () => {
+            const featureItems = document.querySelectorAll('.feature-item');
+            const highlightAreas = document.querySelectorAll('.highlight-area');
+            const demoWrapper = document.querySelector('.demo-content-wrapper');
+
+            featureItems.forEach(item => {
+                const targetId = item.dataset.target;
+                const targetHighlight = document.getElementById(targetId);
+
+                item.addEventListener('mouseenter', () => {
+                    if (targetHighlight) {
+                        targetHighlight.style.opacity = '1';
+                    }
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    if (targetHighlight) {
+                        targetHighlight.style.opacity = '0';
+                    }
+                });
+            });
+            
+            if (demoWrapper) {
+                 demoWrapper.addEventListener('mouseleave', () => {
+                    highlightAreas.forEach(h => h.style.opacity = '0');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

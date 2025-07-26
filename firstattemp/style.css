@@ -1,0 +1,285 @@
+/* Общие стили и сброс */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Основной шрифт */
+    background-color: #0A0713; /* Очень темный фиолетово-черный фон */
+    color: #E0E0E0; /* Светлый цвет текста */
+    line-height: 1.6;
+    overflow-x: hidden; /* Предотвратить горизонтальный скролл */
+}
+
+a {
+    color: #E0E0E0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #fff;
+}
+
+/* --- Хедер --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(0, 0, 0, 0.2); /* Слегка прозрачный фон */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px); /* Эффект матового стекла, если поддерживается */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #FFF;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #E0E0E0;
+}
+
+.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-trial {
+    background-color: #6A3FFB; /* Яркий фиолетовый */
+    color: #FFF;
+    border: 1px solid #6A3FFB;
+}
+
+.btn-trial:hover {
+    background-color: #7B56FF;
+    border-color: #7B56FF;
+}
+
+/* --- Геройская секция (Hero Section) --- */
+.hero-section {
+    text-align: center;
+    padding: 100px 20px 50px; /* Отступы: сверху, по бокам, снизу */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ai-label-wrapper {
+    margin-bottom: 20px;
+}
+
+.ai-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(106, 63, 251, 0.1); /* Слегка прозрачный фиолетовый */
+    border: 1px solid rgba(106, 63, 251, 0.3);
+    color: #6A3FFB;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ai-label svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.5;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    color: #FFF;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(106, 63, 251, 0.5); /* Небольшое свечение текста */
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #A0A0A0;
+    margin-bottom: 50px;
+}
+
+/* --- Видео контейнер со свечением --- */
+.video-container {
+    position: relative; /* Для позиционирования свечения и видео */
+    width: 100%;
+    max-width: 900px; /* Максимальная ширина, как на оригинале */
+    padding-bottom: 56.25%; /* Соотношение сторон 16:9 для видео (высота = 9/16 ширины) */
+    background-color: #000; /* Фон контейнера, если изображение не загрузилось */
+    border-radius: 20px; /* Скругленные углы всего блока */
+    overflow: hidden; /* Обрезать все, что выходит за границы контейнера */
+    box-shadow: 0 0 50px rgba(106, 63, 251, 0.5); /* Большое свечение вокруг всего блока */
+    margin-bottom: 50px;
+}
+
+.glow-effect-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполнить контейнер, обрезая изображение */
+    /* Если ваше изображение свечения имеет прозрачное отверстие, можно использовать: */
+    /* object-fit: contain; /* Чтобы изображение полностью поместилось */
+    /* opacity: 0.8; */ /* Можно сделать чуть прозрачнее, если видео темное */
+    z-index: 1; /* Свечение под видео */
+}
+
+.video-iframe {
+    position: absolute;
+    top: 50%; /* Смещаем видео в центр */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Точно центрируем */
+    width: 90%; /* Ширина видео относительно контейнера */
+    height: 90%; /* Высота видео относительно контейнера */
+    border-radius: 15px; /* Скругленные углы самого видео */
+    border: none;
+    z-index: 2; /* Видео поверх свечения */
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон для видео, чтобы свечение было видно */
+}
+
+/* .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.play-button svg {
+    color: #FFF;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+} */
+
+/* --- Заглушка для нижнего UI --- */
+.bottom-ui-placeholder {
+    width: 90%;
+    max-width: 1100px;
+    height: 500px; /* Произвольная высота */
+    background-color: rgba(255, 255, 255, 0.05); /* Полупрозрачный белый */
+    border-radius: 20px;
+    margin: 50px auto 100px; /* Отступы сверху, по бокам, снизу */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(106, 63, 251, 0.2); /* Небольшое свечение */
+    backdrop-filter: blur(15px); /* Эффект матового стекла */
+}
+
+
+/* --- Адаптивность для мобильных устройств --- */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1; /* Чтобы кнопки занимали всю доступную ширину */
+        text-align: center;
+    }
+
+    .hero-section {
+        padding-top: 60px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .video-container {
+        width: 95%; /* Ширина на мобильных */
+    }
+
+    .bottom-ui-placeholder {
+        width: 95%;
+        height: 300px; /* Меньшая высота на мобильных */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 32px;
+    }
+    .ai-label {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}

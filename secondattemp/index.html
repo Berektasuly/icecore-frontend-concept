@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IceCore.ai - Ваш путь к эффективной поддержке</title>
+    <style>
+        /* --- ОБЩИЕ СТИЛИ --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #000; color: #fff; }
+        h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+        .section-padding { padding: 100px 45px; }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 5; }
+
+        /* --- ПЛАВАЮЩИЙ ХЭДЕР --- */
+        .main-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; z-index: 1000; background-color: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .header-logo { font-size: 1.8rem; font-weight: bold; text-decoration: none; color: #4A90E2; }
+        .header-nav { display: none; }
+        .header-actions a { color: #d1d1d1; text-decoration: none; margin-left: 20px; transition: color 0.3s ease; }
+        .header-actions a:hover { color: #fff; }
+        .register-button { background-color: #e50914; color: white; padding: 8px 17px; border-radius: 5px; font-weight: 500; }
+
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero-section { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; background-image: url('icecore-bg.png'); background-size: cover; background-position: center center; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.9) 100%); }
+        .hero-content { position: relative; z-index: 5; text-align: center; padding: 0 20px; max-width: 800px; }
+        .hero-content h1 { font-size: 3.125rem; }
+        .hero-content h2 { font-size: 1.625rem; font-weight: 400; margin-bottom: 1.5rem; }
+        .email-form { display: flex; justify-content: center; align-items: center; }
+        .email-input { width: 450px; height: 60px; padding: 10px; font-size: 1rem; border: 1px solid #8c8c8c; border-radius: 2px 0 0 2px; outline: none; }
+        .get-started-button { height: 60px; background-color: #e50914; color: white; font-size: 1.625rem; padding: 0 26px; border: none; cursor: pointer; border-radius: 0 2px 2px 0; }
+        
+        /* --- ОСНОВНОЙ КОНТЕНТ --- */
+        main { position: relative; background-color: #000; }
+        .section-block { text-align: center; }
+
+        /* --- ОБЩИЕ СТИЛИ ДЛЯ БЛОКОВ --- */
+        .section-title { font-size: 2.5rem; color: #fff; opacity: 0.9; margin-bottom: 1rem; text-align: center; }
+        .section-subtitle { font-size: 1.25rem; color: #adb5bd; max-width: 700px; margin: 0 auto 60px auto; text-align: center; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .info-card { background-color: #0F111A; color: #fff; padding: 30px; border-radius: 12px; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; }
+        .info-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .info-card .icon { color: #e50914; margin-bottom: 20px; }
+        .info-card .icon svg { width: 32px; height: 32px; }
+        .info-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+        .info-card p { font-size: 1rem; color: #b3b3b3; line-height: 1.6; }
+        .benefits-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        /* --- СВЕТЯЩИЙСЯ РАЗДЕЛИТЕЛЬ --- */
+        .glow-divider { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-50%); z-index: 20; }
+        .glow-divider svg { width: 100%; height: auto; filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.5)) drop-shadow(0 0 2px rgba(229, 9, 20, 0.3)); }
+        
+        /* --- СЕКЦИЯ "КАК РАБОТАЕТ" --- */
+        .features-grid { display: flex; align-items: center; justify-content: space-between; gap: 40px; text-align: left; }
+        .features-text { flex-basis: 42%; }
+        .features-image { flex-basis: 55%; }
+        .feature-item { display: flex; align-items: flex-start; margin-bottom: 35px; }
+        .feature-icon { margin-right: 20px; color: #E50914; flex-shrink: 0; margin-top: -5px; }
+        .feature-icon svg { width: 32px; height: 32px; }
+        .feature-item h3 { font-size: 1.2rem; margin-bottom: 8px; }
+        .feature-item p { color: #b3b3b3; font-size: 1rem; line-height: 1.5; }
+        .features-image img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+        
+        /* --- СЕКЦИЯ "КОМАНДА" --- */
+        .team-grid { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .team-card { background: #0F111A; padding: 30px; border-radius: 12px; display: flex; align-items: center; gap: 30px; }
+        .team-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .team-card .title { color: #e50914; font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; }
+        .team-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .team-card p { font-size: 1rem; color: #b3b3b3; line-height: 1.6; }
+        
+        /* --- СЕКЦИЯ "ПРИЗЫВ К ДЕЙСТВИЮ" (CTA) --- */
+        .cta-section { background: linear-gradient(45deg, #FF416C, #E50914); text-align: center; }
+        .cta-section .section-title { opacity: 1; }
+        .cta-section .section-subtitle { color: rgba(255,255,255,0.9); }
+        .cta-form { max-width: 700px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; }
+        .form-group { width: 100%; }
+        .full-width { grid-column: 1 / -1; }
+        .cta-form input, .cta-form textarea { width: 100%; padding: 15px; border: none; border-radius: 8px; background: rgba(255,255,255,0.2); color: #fff; font-size: 1rem; outline: none; }
+        .cta-form input::placeholder, .cta-form textarea::placeholder { color: rgba(255,255,255,0.7); }
+        .cta-form textarea { resize: vertical; min-height: 120px; }
+        .cta-submit-btn { background: #fff; color: #e50914; border: none; padding: 15px 30px; font-size: 1.1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: transform 0.2s; }
+        .cta-submit-btn:hover { transform: scale(1.05); }
+
+        /* --- ЭФФЕКТ СВЕЧЕНИЯ --- */
+        .glow-container { position: relative; overflow: hidden; }
+        .mouse-glow { position: absolute; top:0; left:0; width: 600px; height: 600px; background: radial-gradient(circle,rgba(200,200,220,0.1) 0%,rgba(255,255,255,0) 60%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity .4s ease-out; }
+        .glow-container:hover .mouse-glow { opacity: 1; transition: opacity .2s ease-in; }
+
+        @media (max-width: 768px) {
+            .section-padding { padding: 60px 20px; }
+            .hero-content h1 { font-size: 2rem; }
+            .email-form { flex-direction: column; align-items: stretch; max-width: 350px; margin: 0 auto; }
+            .email-input { border-radius: 2px; margin-bottom: 10px; width: 100%; }
+            .features-grid, .team-card { flex-direction: column; }
+            .team-card { align-items: flex-start; }
+            .features-text { margin-top: 40px; }
+            .cta-form { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="#" class="header-logo">icecore.ai</a>
+        <div class="header-actions"><a href="#">Войти</a><a href="#" class="register-button">Регистрация</a></div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content"><h1>Безграничный анализ данных, отчёты и многое другое.</h1><h2>Работайте где угодно. Отменяйте когда угодно.</h2><form class="email-form" action="#"><input class="email-input" type="email" placeholder="Адрес электронной почты" required><button class="get-started-button" type="submit">Начать ></button></form></div>
+    </section>
+
+    <main class="glow-container">
+        <div class="mouse-glow"></div>
+        <div class="glow-divider">
+            <svg width="100%" height="20" viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="glow-gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#7e00ff; stop-opacity:0.8" /><stop offset="50%" style="stop-color:#e50914; stop-opacity:1" /><stop offset="100%" style="stop-color:#7e00ff; stop-opacity:0.8" /></linearGradient></defs><path d="M0 10 Q 300 20, 600 10 T 1200 10" fill="none" stroke="url(#glow-gradient)" stroke-width="2"/></svg>
+        </div>
+        
+        <!-- Секция "ПРОБЛЕМА" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Поддержка клиентов превратилась в хаос?</h1>
+                <p class="section-subtitle">Множество каналов, ручная обработка и потеря ценных данных мешают вашему росту.</p>
+                <div class="info-grid">
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div><h3>Информационный перегруз</h3><p>Запросы из десятков каналов (email, чаты, соцсети) теряются и обрабатываются неэффективно.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-1.103 0-2 .897-2 2v2.333L6.333 9H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2h2.333L10 21.333V22c0 1.103.897 2 2 2s2-.897 2-2v-2.333l3.667-1.667H20c1.103 0 2-.897 2-2v-6c0-1.103-.897-2-2-2h-2.333L14 7.333V5c0-1.103-.897-2-2-2zm-1 2h2v2.333L12 8 11 7.333V5zm-4.333 6h10.666L14 13.667V17H9v-3.333L6.667 11z"/></svg></div><h3>Неточная классификация</h3><p>Ручная сортировка обращений ведет к ошибкам, неверным выводам и потере времени.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zM5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM5 7h14v13H5V7z"/></svg></div><h3>Упущенные инсайты</h3><p>Ценные данные из обращений не используются для улучшения продукта и сервиса.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "РЕШЕНИЕ (КАК?)" -->
+        <section class="features-section section-padding">
+            <div class="container">
+                <h1 class="section-title">Как IceCore.ai вносит порядок?</h1>
+                <div class="features-grid">
+                    <div class="features-text"><ul class="features-list"><li class="feature-item"><div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.383 3.033a1.5 1.5 0 0 0-2.766 0L2.15 17.473a1.5 1.5 0 0 0 1.383 2.277h16.934a1.5 1.5 0 0 0 1.383-2.277L12.383 3.033zM12 14.75a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-1-4a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H12a1 1 0 0 1-1-1z"/></svg></div><div><h3>Централизация и Структурирование</h3><p>Все обращения собираются в одном месте и корректно классифицируются.</p></div></li><li class="feature-item"><div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9 9 0 0 0-9 9c0 4.478 3.226 8.213 7.538 8.896l-1.12 1.68A.5.5 0 0 0 9.833 22h4.334a.5.5 0 0 0 .415-.724l-1.12-1.68C17.774 19.213 21 15.478 21 11a9 9 0 0 0-9-9zM6.5 11a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm5.5 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5.5-5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/></svg></div><div><h3>Осмысленная AI-Классификация</h3><p>Наш подход обеспечивает точность и глубину категоризации запросов.</p></div></li><li class="feature-item"><div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 18h16V6H4v12zM3 4c0-.552.448-1 1-1h16c.552 0 1 .448 1 1v16c0 .552-.448 1-1 1H4c-.552 0-1-.448-1-1V4zm4-1.5V1h8v1.5H7zm3 10.5h4V11h-4v2z"/></svg></div><div><h3>Действенная Аналитика</h3><p>Наглядные дашборды, которые дают реальные инсайты, а не просто цифры.</p></div></li><li class="feature-item"><div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.34 3.064a1 1 0 0 0-1.293.284L5.61 11.01a1 1 0 0 0 1.516 1.303l4.89-5.636 5.556 5.556a1 1 0 0 0 1.414-1.414l-6.26-6.26a1 1 0 0 0-.883-.395zM9 13a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-5a1 1 0 0 0-1-1zm6 0a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0v-5a1 1 0 0 0-1-1z"/></svg></div><div><h3>Управление Потоком</h3><p>Эффективное отслеживание статусов и назначение ответственных.</p></div></li></ul></div>
+                    <div class="features-image"><img src="icecore-dashboard.png" alt="IceCore.ai Dashboard"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Секция "ВЫГОДЫ" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Ключевые выгоды для вашего бизнеса</h1>
+                <div class="info-grid benefits-grid">
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg></div><h3>Точные данные для решений</h3><p>Принимайте решения, основанные на реальных данных, а не на догадках.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/><path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"/></svg></div><h3>Экономия времени команды</h3><p>Автоматизируйте ручную классификацию и освободите ресурсы для важных задач.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 18c3.93 0 7-3.07 7-7s-3.07-7-7-7-7 3.07-7 7 3.07 7 7 7zm0-12c2.822 0 5 2.178 5 5s-2.178 5-5 5-5-2.178-5-5 2.178-5 5-5z"/><path d="M12 14c-1.037 0-2-.828-2-1.934V12h4v.066C14 13.172 13.037 14 12 14z"/><path d="M11 9h2v2h-2z"/></svg></div><h3>Улучшение продукта и сервиса</h3><p>Понимайте истинные потребности клиентов и развивайте продукт целенаправленно.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.11a.56.56 0 0 0 .499.383l5.625.516a.562.562 0 0 1 .312.956l-4.25 3.527a.565.565 0 0 0-.175.592l1.25 5.438a.563.563 0 0 1-.825.587L12 17.812l-5.125 3.156a.563.563 0 0 1-.825-.587l1.25-5.437a.562.562 0 0 0-.175-.592l-4.25-3.528a.562.562 0 0 1 .312-.956l5.625-.516a.562.562 0 0 0 .5-.383l2.125-5.11z"/></svg></div><h3>Повышение лояльности</h3><p>Качественная и быстрая поддержка ведет к довольным клиентам.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13 16V8l6 4-6 4z"/><path d="M11.17 3.272a1 1 0 0 0-1.107.39L6.18 9.228a1 1 0 0 1-.853.51H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h3.327a1 1 0 0 1 .853.51l3.88 5.566a1 1 0 0 0 1.107.39A10.02 10.02 0 0 0 22 12c0-5.514-4.486-10-10-10-..333 0-.663.017-..992.05A.996.996 0 0 0 11.17 3.272z"/></svg></div><h3>Быстрое внедрение</h3><p>Начните получать пользу от IceCore.ai в кратчайшие сроки благодаря простоте интеграции.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 21h1V10H4v11zM10.5 21h1V10h-1v11zM17 21h1V10h-1v11zM21 5H3c-.552 0-1 .448-1 1v2h20V6c0-.552-.448-1-1-1z"/></svg></div><h3>Прозрачная аналитика</h3><p>Отслеживайте ключевые метрики поддержки на интуитивно понятных дашбордах.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "ДЛЯ КОГО" -->
+        <section class="section-block section-padding">
+            <div class="container">
+                <h1 class="section-title">Для кого создан IceCore.ai?</h1>
+                <p class="section-subtitle">Если вы стремитесь к data-driven подходу в поддержке и цените эффективность.</p>
+                <div class="info-grid">
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0 2c-2.67 0-8 1.337-8 4v2h16v-2c0-2.663-5.33-4-8-4z"/></svg></div><h3>IT-команды и Службы поддержки</h3><p>Оптимизируйте процессы и повышайте качество обслуживания.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4zm0 2c-2.67 0-8 1.337-8 4v2h16v-2c0-2.663-5.33-4-8-4z"/></svg></div><h3>Менеджеры по работе с клиентами</h3><p>Получайте глубокое понимание клиентов для улучшения взаимодействия.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-3V4c0-1.103-.897-2-2-2H9c-1.103 0-2 .897-2 2v2H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm11 15H4V8h16v11z"/></svg></div><h3>Малый и Средний Бизнес</h3><p>Доступный инструмент для эффективного управления поддержкой без больших затрат.</p></div>
+                    <div class="info-card"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.451 17.339l.293-2.028-1.742-1.33 2.119-.153L14 11.967l.88 1.861 2.118.153-1.742 1.33.293 2.028-1.8-1.084-1.8 1.084zM13 2a1 1 0 0 0-1.83-..588l-3.364 6.728L1.32 9.074a1 1 0 0 0-.58 1.713l5.06 3.87-1.2 6.626a1 1 0 0 0 1.453 1.054L12 19.34l5.946 3.003a1 1 0 0 0 1.454-1.054l-1.2-6.626 5.061-3.87a1 1 0 0 0-.58-1.713l-6.486-.934L13.83 2.588A1 1 0 0 0 13 2z"/></svg></div><h3>Стартапы</h3><p>Быстро реагируйте на обратную связь и стройте клиент-ориентированный продукт.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "КОМАНДА" -->
+        <section class="team-section section-padding">
+            <div class="container">
+                <h1 class="section-title" style="color:#000;">За IceCore.ai стоит команда экспертов</h1>
+                <p class="section-subtitle" style="color:#6c757d;">Мы объединили наш опыт, чтобы создать решение, которое действительно помогает.</p>
+                <div class="team-grid">
+                    <div class="team-card"><img src="aisulu.png" alt="Айсулу Калшабекова"><div><div class="title">СООСНОВАТЕЛЬНИЦА, CEO</div><h3>Айсулу Калшабекова</h3><p>Экспертиза в анализе данных, клиентской поддержке и продуктовом видении. Опыт в Kaspi Bank и Relog.</p></div></div>
+                    <div class="team-card"><img src="samat.png" alt="Самат Калшабеков"><div><div class="title">СООСНОВАТЕЛЬ, CTO</div><h3>Самат Калшабеков</h3><p>Frontend Lead с опытом в nFactorial, BCC, Datarockets, Beeline. Экспертиза в fullstack разработке и построении архитектуры.</p></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Секция "ПРИЗЫВ К ДЕЙСТВИЮ" -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <h1 class="section-title">Готовы навести порядок в вашей поддержке?</h1>
+            <p class="section-subtitle">Присоединяйтесь к нашему пилотному проекту! Получите ранний доступ к IceCore.ai, помогите нам сделать продукт лучше и начните получать ценные инсайты уже сегодня.</p>
+            <form class="cta-form" action="#"><div class="form-group"><input type="text" placeholder="Ваше имя" required></div><div class="form-group"><input type="email" placeholder="Ваш Email" required></div><div class="form-group full-width"><input type="text" placeholder="Название компании (необязательно)"></div><div class="form-group full-width"><textarea placeholder="Кратко о вашей задаче или вопрос (необязательно)"></textarea></div><div class="form-group full-width" style="text-align: center;"><button type="submit" class="cta-submit-btn">Отправить заявку на пилот</button></div></form>
+        </div>
+    </section>
+
+    <script>
+        const glowContainer = document.querySelector('.glow-container');
+        if (glowContainer) {
+            const glow = glowContainer.querySelector('.mouse-glow');
+            glowContainer.addEventListener('mousemove', (e) => {
+                const rect = glowContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                glow.style.left = `${x}px`;
+                glow.style.top = `${y}px`;
+            });
+        }
+    </script>
+</body>
+</html>
